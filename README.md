@@ -13,7 +13,7 @@ git clone https://github.com/DiZiNnEs/weather-forecast-parser/tree/dev
 ## Usage
 
 ```python
-python3 ...
+python3 parser.py
 ```
 
 ## Contributing
