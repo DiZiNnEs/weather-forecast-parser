@@ -1,4 +1,4 @@
-from typing import Set
+from typing import Dict, Any, Optional
 
 import aiohttp
 import asyncio
@@ -9,14 +9,17 @@ user_agent = {
 url = 'https://www.gismeteo.kz/weather-kirgizovo-197163/month/'
 
 
-async def request(url_: str, headers: Set[str]) -> None:
+async def request(url_: str, headers: Dict) -> str:
     session = aiohttp.ClientSession()
 
     async with session.get(url=url_, headers=headers) as response:
+        content = await response.text()
         print(response.status)
         print(await response.text())
 
     await session.close()
+
+    return content
 
 
 if __name__ == '__main__':
