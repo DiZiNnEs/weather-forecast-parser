@@ -9,17 +9,16 @@ user_agent = {
 url = 'https://www.gismeteo.kz/weather-kirgizovo-197163/month/'
 
 
-async def request(url_: str, headers: Dict) -> str:
+async def request(url_: str, headers: Dict) -> int:
     session = aiohttp.ClientSession()
 
     async with session.get(url=url_, headers=headers) as response:
         content = await response.text()
-        print(response.status)
-        print(await response.text())
+        content_len = len(await response.text())  # 337550
 
     await session.close()
 
-    return content
+    return content_len
 
 
 if __name__ == '__main__':
