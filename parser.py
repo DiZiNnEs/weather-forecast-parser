@@ -37,6 +37,7 @@ async def start() -> None:
 
 if __name__ == '__main__':
     loop = asyncio.get_event_loop()
+    print(len(loop.run_until_complete(request(url, user_agent))))
     # loop.run_until_complete(request(url, user_agent))
     # html_processing(start())
     loop.create_task(html_processing())
