@@ -1,6 +1,4 @@
 import parser
-
-
 from unittest import main
 from aiounittest import AsyncTestCase
 
