@@ -23,13 +23,21 @@ async def request(url_: str, headers: Dict) -> str:
     return content
 
 
-def html_processing(html: Coroutine[Any, Any, str]) -> None:
-    soup = BeautifulSoup(html, 'html.parser')
+def html_processing() -> None:
+    print('Hello')
+    soup = BeautifulSoup(request(url, user_agent), 'html.parser')
     for html in soup.find_all('div'):
         print(html)
+
+
+async def start() -> None:
+    print('Hello')
+    html_processing()
 
 
 if __name__ == '__main__':
     loop = asyncio.get_event_loop()
     # loop.run_until_complete(request(url, user_agent))
-    html_processing(request(url, user_agent))
+    # html_processing(start())
+    loop.create_task(html_processing())
+    # asyncio.create_task(start())
