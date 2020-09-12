@@ -1,4 +1,6 @@
-from typing import Dict
+from bs4 import BeautifulSoup
+
+from typing import Dict, Any, Coroutine
 
 import aiohttp
 import asyncio
@@ -14,16 +16,20 @@ async def request(url_: str, headers: Dict) -> str:
 
     async with session.get(url=url_, headers=headers) as response:
         content = await response.text()
-        content_len = len(await response.text())  # 337550
+        # content_len = len(await response.text())  # 337550
 
     await session.close()
 
     return content
 
 
-async def html_processing(html: str) -> None:
-    pass
+def html_processing(html: Coroutine[Any, Any, str]) -> None:
+    soup = BeautifulSoup(html, 'html.parser')
+    for html in soup.find_all('div'):
+        print(html)
+
 
 if __name__ == '__main__':
     loop = asyncio.get_event_loop()
-    loop.run_until_complete(request(url, user_agent))
+    # loop.run_until_complete(request(url, user_agent))
+    html_processing(request(url, user_agent))
