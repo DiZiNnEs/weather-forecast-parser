@@ -1,4 +1,4 @@
-from typing import Dict, Any, Optional
+from typing import Dict
 
 import aiohttp
 import asyncio
@@ -6,10 +6,10 @@ import asyncio
 user_agent = {
     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36'
 }
-url = 'https://www.gismeteo.kz/weather-kirgizovo-197163/month/'
+url = 'https://www.gismeteo.kz/weather-kokshetau-4616/month/'
 
 
-async def request(url_: str, headers: Dict) -> int:
+async def request(url_: str, headers: Dict) -> str:
     session = aiohttp.ClientSession()
 
     async with session.get(url=url_, headers=headers) as response:
@@ -18,8 +18,11 @@ async def request(url_: str, headers: Dict) -> int:
 
     await session.close()
 
-    return content_len
+    return content
 
+
+async def html_processing(html: str) -> None:
+    pass
 
 if __name__ == '__main__':
     loop = asyncio.get_event_loop()
