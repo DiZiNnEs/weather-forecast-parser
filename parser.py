@@ -22,10 +22,15 @@ async def request(url_: str, headers: Dict) -> str:
 
 async def html_processing() -> None:
     soup = BeautifulSoup(await request(url, user_agent), 'html.parser')
+    result = []
 
     for x in soup.find_all(attrs={'data-text': 'Пасмурно, дождь'}):
-        print(x['data-text'])
+        if x['data-text'] is not None:
+            result.append(x['data-text'])
+        else:
+            pass
 
+    print(result)
 
 if __name__ == '__main__':
     loop = get_event_loop()
