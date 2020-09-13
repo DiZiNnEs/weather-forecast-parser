@@ -23,8 +23,8 @@ async def request(url_: str, headers: Dict) -> str:
 async def html_processing() -> None:
     soup = BeautifulSoup(await request(url, user_agent), 'html.parser')
     result = []
-
-    for x in soup.find_all(attrs={'data-text': 'Пасмурно, дождь'}):
+    weathers = ['Пасмурно, дождь', 'Пасмурно, небольшой дождь']
+    for x in soup.find_all(attrs={'data-text': weathers}):
         if x['data-text'] is not None:
             result.append(x['data-text'])
         else:
