@@ -3,7 +3,7 @@ from asyncio import get_event_loop
 
 from bs4 import BeautifulSoup
 
-from typing import Dict, List
+from typing import Dict, List, Coroutine, Any
 
 user_agent = {
     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36'
@@ -34,10 +34,18 @@ async def html_processing() -> List[str]:
     return result
 
 
-async def conclusion():
-    pass
+async def conclusion(result: Coroutine[Any, Any, List[str]]) -> None:
+    weather = await result
+    print('Пасмурно и дождь ожидается: ', weather.count('Пасмурно, дождь'))
+    print('Облачно и небольшой дождь ожидается: ', weather.count('Облачно, небольшой дождь'))
+    print('Пасмурно и небольшой дождь ожидается: ', weather.count('Пасмурно, небольшой дождь'))
+    print('Переменная облачность и небольшой дождь ожидается: ',
+          weather.count('Переменная облачность, небольшой дождь'))
+    print('Ожидается дождь и гроза около: ', weather.count('Пасмурно, дождь, гроза'))
+    print('Облачно и небольшой дождь с грозой ожидается: ', weather.count('Облачно, небольшой дождь, гроща'))
+    print('Малооблачно с небольшим дождём ожидается около: ', weather.count('Малооблачно, небольшой дождь'))
 
 
 if __name__ == '__main__':
     loop = get_event_loop()
-    print(len(loop.run_until_complete(html_processing())))
+    loop.run_until_complete(conclusion(html_processing()))
