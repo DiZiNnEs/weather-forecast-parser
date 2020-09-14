@@ -34,6 +34,10 @@ async def html_processing() -> List[str]:
     return result
 
 
+async def conclusion():
+    pass
+
+
 if __name__ == '__main__':
     loop = get_event_loop()
     print(len(loop.run_until_complete(html_processing())))
