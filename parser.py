@@ -3,7 +3,7 @@ from asyncio import get_event_loop
 
 from bs4 import BeautifulSoup
 
-from typing import Dict
+from typing import Dict, List
 
 user_agent = {
     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36'
@@ -20,18 +20,20 @@ async def request(url_: str, headers: Dict) -> str:
     return content
 
 
-async def html_processing() -> None:
+async def html_processing() -> List[str]:
     soup = BeautifulSoup(await request(url, user_agent), 'html.parser')
     result = []
-    weathers = ['Пасмурно, дождь', 'Пасмурно, небольшой дождь']
-    for x in soup.find_all(attrs={'data-text': weathers}):
-        if x['data-text'] is not None:
-            result.append(x['data-text'])
+    weathers = ['Пасмурно, дождь', 'Облачно, небольшой дождь', 'Пасмурно, небольшой дождь',
+                'Переменная облачность, небольшой дождь',
+                'Пасмурно, дождь, гроза', 'Облачно, небольшой дождь, гроза', 'Малооблачно, небольшой дождь']
+    for looking_rain in soup.find_all(attrs={'data-text': weathers}):
+        if looking_rain['data-text'] is not None:
+            result.append(looking_rain['data-text'])
         else:
-            pass
+            result.append('It won\'t rain this month')
+    return result
 
-    print(result)
 
 if __name__ == '__main__':
     loop = get_event_loop()
-    loop.run_until_complete(html_processing())
+    print(len(loop.run_until_complete(html_processing())))
