@@ -12,6 +12,12 @@ url = 'https://www.gismeteo.kz/weather-kokshetau-4616/month/'
 
 
 async def request(url_: str, headers: Dict) -> str:
+    """
+    This function make async request to web-site
+    :param url_: str
+    :param headers: Dict[str: str]
+    :return: HTML[str]
+    """
     session = ClientSession()
     async with session.get(url=url_, headers=headers) as response:
         content = await response.text()
@@ -21,6 +27,10 @@ async def request(url_: str, headers: Dict) -> str:
 
 
 async def html_processing() -> List[str]:
+    """
+    This function processing html from function request
+    :return: List[str]
+    """
     soup = BeautifulSoup(await request(url, user_agent), 'html.parser')
     result = []
     weathers = ['Пасмурно, дождь', 'Облачно, небольшой дождь', 'Пасмурно, небольшой дождь',
@@ -35,6 +45,11 @@ async def html_processing() -> List[str]:
 
 
 async def output_weathers(result: Coroutine[Any, Any, List[str]]) -> None:
+    """
+    This function serves for output result weathers
+    :param result: Coroutine[Any, Any, List[str]
+    :return: None
+    """
     weather = await result
     print(len(weather))
     print('Пасмурно и дождь ожидается: ', weather.count('Пасмурно, дождь'))
