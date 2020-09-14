@@ -34,7 +34,7 @@ async def html_processing() -> List[str]:
     return result
 
 
-async def conclusion(result: Coroutine[Any, Any, List[str]]) -> None:
+async def output_weathers(result: Coroutine[Any, Any, List[str]]) -> None:
     weather = await result
     print(len(weather))
     print('Пасмурно и дождь ожидается: ', weather.count('Пасмурно, дождь'))
@@ -49,4 +49,4 @@ async def conclusion(result: Coroutine[Any, Any, List[str]]) -> None:
 
 if __name__ == '__main__':
     loop = get_event_loop()
-    loop.run_until_complete(conclusion(html_processing()))
+    loop.run_until_complete(output_weathers(html_processing()))
