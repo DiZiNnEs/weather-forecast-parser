@@ -51,6 +51,11 @@ async def output_weathers(result: Coroutine[Any, Any, List[str]]) -> None:
     :return: None
     """
     weather = await result
+    a = 1
+    for x in weather:
+        print(x, x.count(x), a)
+        a += 1
+
     print(len(weather))
     print('Пасмурно и дождь ожидается: ', weather.count('Пасмурно, дождь'))
     print('Облачно и небольшой дождь ожидается: ', weather.count('Облачно, небольшой дождь'))
