@@ -51,27 +51,14 @@ async def output_weathers(result: Coroutine[Any, Any, List[str]]) -> List[str]:
     :param result: Coroutine[Any, Any, List[str]
     :return: None
     """
-    weathers = await result
-    print(len(weathers))
-    final = list(set(weathers))
-    print(final)
+    weathers_ = await result
+    weathers = list(set(weathers_))
     weather_list = []
-    for for_weather in final:
+    for for_weather in weathers:
         # print(f'Погоды: "{for_weather}" будет около {weathers.count(for_weather)} раза')
-        weather_list.append(f'Погоды: "{for_weather}" будет около {weathers.count(for_weather)} раза')
+        weather_list.append(f'Погоды: "{for_weather}" будет около {weathers_.count(for_weather)} раза')
 
-    print(len(weather_list))
     return weather_list
-
-    # print(len(weathers))
-    # print('Пасмурно и дождь ожидается: ', weathers.count('Пасмурно, дождь'))
-    # print('Облачно и небольшой дождь ожидается: ', weathers.count('Облачно, небольшой дождь'))
-    # print('Пасмурно и небольшой дождь ожидается: ', weathers.count('Пасмурно, небольшой дождь'))
-    # print('Переменная облачность и небольшой дождь ожидается: ',
-    #       weathers.count('Переменная облачность, небольшой дождь'))
-    # print('Ожидается дождь и гроза около: ', weathers.count('Пасмурно, дождь, гроза'))
-    # print('Облачно и небольшой дождь с грозой ожидается: ', weathers.count('Облачно, небольшой дождь, гроза'))
-    # print('Малооблачно с небольшим дождём ожидается около: ', weathers.count('Малооблачно, небольшой дождь'))
 
 
 if __name__ == '__main__':
