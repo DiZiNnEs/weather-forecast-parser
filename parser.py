@@ -33,8 +33,9 @@ async def html_processing() -> List[str]:
     """
     soup = BeautifulSoup(await request(url, user_agent), 'html.parser')
     result = []
-    weathers = ['Пасмурно, дождь', 'Облачно, небольшой дождь', 'Пасмурно, небольшой дождь',
-                'Переменная облачность, небольшой дождь',
+    weathers = ['Пасмурно, дождь', 'Облачно, небольшой дождь', 'Пасмурно, небольшой дождь', 'Пасмурно, сильный дождь',
+                'Переменная облачность, небольшой дождь', 'Пасмурно, сильный дождь, гроза',
+                'Малооблачно, небольшой дождь',
                 'Пасмурно, дождь, гроза', 'Облачно, небольшой дождь, гроза', 'Малооблачно, небольшой дождь']
     for looking_rain in soup.find_all(attrs={'data-text': weathers}):
         if looking_rain['data-text'] is not None:
@@ -50,21 +51,23 @@ async def output_weathers(result: Coroutine[Any, Any, List[str]]) -> None:
     :param result: Coroutine[Any, Any, List[str]
     :return: None
     """
-    weather = await result
-    a = 1
-    for x in weather:
-        print(x, x.count(x), a)
-        a += 1
+    weathers = await result
+    print(len(weathers))
+    final = list(set(weathers))
+    print(final)
 
-    print(len(weather))
-    print('Пасмурно и дождь ожидается: ', weather.count('Пасмурно, дождь'))
-    print('Облачно и небольшой дождь ожидается: ', weather.count('Облачно, небольшой дождь'))
-    print('Пасмурно и небольшой дождь ожидается: ', weather.count('Пасмурно, небольшой дождь'))
-    print('Переменная облачность и небольшой дождь ожидается: ',
-          weather.count('Переменная облачность, небольшой дождь'))
-    print('Ожидается дождь и гроза около: ', weather.count('Пасмурно, дождь, гроза'))
-    print('Облачно и небольшой дождь с грозой ожидается: ', weather.count('Облачно, небольшой дождь, гроза'))
-    print('Малооблачно с небольшим дождём ожидается около: ', weather.count('Малооблачно, небольшой дождь'))
+    for for_weather in final:
+        print(f'Погоды: "{for_weather}" будет около {weathers.count(for_weather)} раза')
+
+    # print(len(weathers))
+    # print('Пасмурно и дождь ожидается: ', weathers.count('Пасмурно, дождь'))
+    # print('Облачно и небольшой дождь ожидается: ', weathers.count('Облачно, небольшой дождь'))
+    # print('Пасмурно и небольшой дождь ожидается: ', weathers.count('Пасмурно, небольшой дождь'))
+    # print('Переменная облачность и небольшой дождь ожидается: ',
+    #       weathers.count('Переменная облачность, небольшой дождь'))
+    # print('Ожидается дождь и гроза около: ', weathers.count('Пасмурно, дождь, гроза'))
+    # print('Облачно и небольшой дождь с грозой ожидается: ', weathers.count('Облачно, небольшой дождь, гроза'))
+    # print('Малооблачно с небольшим дождём ожидается около: ', weathers.count('Малооблачно, небольшой дождь'))
 
 
 if __name__ == '__main__':
