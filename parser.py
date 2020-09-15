@@ -45,7 +45,7 @@ async def html_processing() -> List[str]:
     return result
 
 
-async def output_weathers(result: Coroutine[Any, Any, List[str]]) -> None:
+async def output_weathers(result: Coroutine[Any, Any, List[str]]) -> List[str]:
     """
     This function serves for output result weathers
     :param result: Coroutine[Any, Any, List[str]
@@ -55,9 +55,13 @@ async def output_weathers(result: Coroutine[Any, Any, List[str]]) -> None:
     print(len(weathers))
     final = list(set(weathers))
     print(final)
-
+    weather_list = []
     for for_weather in final:
-        print(f'Погоды: "{for_weather}" будет около {weathers.count(for_weather)} раза')
+        # print(f'Погоды: "{for_weather}" будет около {weathers.count(for_weather)} раза')
+        weather_list.append(f'Погоды: "{for_weather}" будет около {weathers.count(for_weather)} раза')
+
+    print(len(weather_list))
+    return weather_list
 
     # print(len(weathers))
     # print('Пасмурно и дождь ожидается: ', weathers.count('Пасмурно, дождь'))
