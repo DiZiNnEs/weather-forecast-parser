@@ -38,15 +38,10 @@ async def html_processing() -> List[str]:
     """
     soup = BeautifulSoup(await request(url, user_agent), 'html.parser')
     result = []
-    weathers = ['Пасмурно, дождь', 'Облачно, небольшой дождь', 'Пасмурно, небольшой дождь', 'Пасмурно, сильный дождь',
-                'Переменная облачность, небольшой дождь', 'Пасмурно, сильный дождь, гроза',
-                'Малооблачно, небольшой дождь',
-                'Пасмурно, дождь, гроза', 'Облачно, небольшой дождь, гроза', 'Малооблачно, небольшой дождь']
-    for looking_rain in soup.find_all(attrs={'data-text': weathers}):
-        if looking_rain['data-text'] is not None:
-            result.append(looking_rain['data-text'])
-        else:
-            result.append('It won\'t rain this month')
+
+    for html in soup.select('#tbl7d'):
+        result.append(html)
+
     return result
 
 
