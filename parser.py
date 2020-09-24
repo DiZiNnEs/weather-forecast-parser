@@ -55,9 +55,12 @@ async def output_weathers(result: Coroutine[Any, Any, List[str]]) -> List[str]:
     weathers = list(set(weathers_))
     weather_list = []
     for for_weather in weathers:
-        weather_list.append(f'Погоды: "{for_weather}" будет около {weathers_.count(for_weather)} раза')
+        weather_list.append(f'Погода: "{for_weather}" будет около {weathers_.count(for_weather)} раза')
 
+    for x in weather_list:
+        print(x)
     return weather_list
+
 
 
 if __name__ == '__main__':
