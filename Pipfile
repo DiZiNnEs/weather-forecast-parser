@@ -9,6 +9,7 @@ verify_ssl = true
 aiohttp = "*"
 aiounittest = "*"
 beautifulsoup4 = "*"
+transliterate = "*"
 
 [requires]
 python_version = "3.8"
