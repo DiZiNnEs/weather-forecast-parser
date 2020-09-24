@@ -3,7 +3,12 @@ from asyncio import get_event_loop
 
 from bs4 import BeautifulSoup
 
-from typing import Dict, List, Coroutine, Any
+from typing import (
+    Dict,
+    List,
+    Coroutine,
+    Any
+)
 
 user_agent = {
     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36'
@@ -60,7 +65,6 @@ async def output_weathers(result: Coroutine[Any, Any, List[str]]) -> List[str]:
     for x in weather_list:
         print(x)
     return weather_list
-
 
 
 if __name__ == '__main__':
