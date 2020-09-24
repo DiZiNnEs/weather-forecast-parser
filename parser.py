@@ -13,7 +13,7 @@ from typing import (
 user_agent = {
     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36'
 }
-url = 'https://www.gismeteo.kz/weather-kokshetau-4616/month/'
+url = 'https://www.meteoguru.com/en/pro/forecast/?latlon=51.1605,71.4704'
 
 
 async def request(url_: str, headers: Dict) -> str:
