@@ -13,7 +13,7 @@ from typing import (
 user_agent = {
     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36'
 }
-url = 'https://www.meteoguru.com/en/pro/forecast/?latlon=51.1605,71.4704'
+url = 'https://openweathermap.org/city/1522203'
 
 
 async def request(url_: str, headers: Dict) -> str:
@@ -39,8 +39,8 @@ async def html_processing() -> List[str]:
     soup = BeautifulSoup(await request(url, user_agent), 'html.parser')
     result = []
 
-    for html in soup.select('#tbl7d'):
-        result.append(html)
+    for html in soup.select('title'):
+        print(html)
 
     return result
 
@@ -64,4 +64,4 @@ async def output_weathers(result: Coroutine[Any, Any, List[str]]) -> List[str]:
 
 if __name__ == '__main__':
     loop = get_event_loop()
-    loop.run_until_complete(output_weathers(html_processing()))
+    print(loop.run_until_complete(html_processing()))
