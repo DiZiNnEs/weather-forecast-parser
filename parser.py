@@ -35,6 +35,10 @@ async def request(url_: str, headers: Dict) -> str:
     return content
 
 
+async def response(response_text: str) -> None:
+    pass
+
+
 if __name__ == '__main__':
     loop = get_event_loop()
     print(loop.run_until_complete(request(url_=url, headers=user_agent)))
