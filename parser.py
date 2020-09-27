@@ -13,7 +13,12 @@ from typing import (
 user_agent = {
     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36'
 }
-url = 'https://openweathermap.org/city/1522203'
+url = 'https://weather.rambler.ru/v-nur-sultane/10-days/'
+cookies = 'i=F751YyFDwSKncehXgm8UG80vVFgi7SPlxS3U9ypXpaSYs8aJ1fUQGvfd3QBT5Nxa3t3EGMa43ZD0kQZGX9hX+TmUjX4='
+
+cookies_ = {
+    'yandexeuid': '4425491161598448736'
+}
 
 
 async def request(url_: str, headers: Dict) -> str:
@@ -24,7 +29,7 @@ async def request(url_: str, headers: Dict) -> str:
     :return: HTML[str]
     """
     session = ClientSession()
-    async with session.get(url=url_, headers=headers) as response:
+    async with session.get(url=url_, headers=headers, cookies=cookies_) as response:
         content = await response.text()
     await session.close()
 
@@ -38,9 +43,9 @@ async def html_processing() -> List[str]:
     """
     soup = BeautifulSoup(await request(url, user_agent), 'html.parser')
     result = []
-
-    for html in soup.select('title'):
-        print(html)
+    print(soup)
+    # for html in soup.select('title'):
+        # print(html)
 
     return result
 
