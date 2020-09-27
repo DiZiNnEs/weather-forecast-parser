@@ -13,7 +13,7 @@ from typing import (
 user_agent = {
     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36'
 }
-url = 'https://openweathermap.org/city/1522203'
+url = 'https://api.openweathermap.org/data/2.5/onecall?lat=53.2871&lon=69.4044&exclude=weekly&appid=04b131cf413fc3c95dc41cb0d44326d0'
 
 
 async def request(url_: str, headers: Dict) -> str:
@@ -31,37 +31,6 @@ async def request(url_: str, headers: Dict) -> str:
     return content
 
 
-async def html_processing() -> List[str]:
-    """
-    This function processing html from function request
-    :return: List[str]
-    """
-    soup = BeautifulSoup(await request(url, user_agent), 'html.parser')
-    result = []
-
-    for html in soup.select('title'):
-        print(html)
-
-    return result
-
-
-async def output_weathers(result: Coroutine[Any, Any, List[str]]) -> List[str]:
-    """
-    This function serves for output result weathers
-    :param result: Coroutine[Any, Any, List[str]
-    :return: None
-    """
-    weathers_ = await result
-    weathers = list(set(weathers_))
-    weather_list = []
-    for for_weather in weathers:
-        weather_list.append(f'Погода: "{for_weather}" будет около {weathers_.count(for_weather)} раза')
-
-    for x in weather_list:
-        print(x)
-    return weather_list
-
-
 if __name__ == '__main__':
     loop = get_event_loop()
-    print(loop.run_until_complete(html_processing()))
+    print(loop.run_until_complete(request(url_=url, headers=user_agent)))
