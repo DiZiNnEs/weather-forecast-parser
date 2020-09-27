@@ -1,14 +1,23 @@
 from aiohttp import ClientSession
 from asyncio import get_event_loop
 
+from dotenv import load_dotenv
+
 from typing import (
     Dict,
 )
 
+import os
+
+load_dotenv()
+
+API_KEY = os.getenv("WEATHER_API_KEY")
+
 user_agent = {
     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36'
 }
-url = 'https://api.openweathermap.org/data/2.5/onecall?lat=53.2871&lon=69.4044&exclude=weekly&appid=04b131cf413fc3c95dc41cb0d44326d0'
+
+url = f'https://api.openweathermap.org/data/2.5/onecall?lat=53.2871&lon=69.4044&exclude=weekly&appid={API_KEY}'
 
 
 async def request(url_: str, headers: Dict) -> str:
