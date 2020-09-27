@@ -1,10 +1,12 @@
+import json
+
 from aiohttp import ClientSession
 from asyncio import get_event_loop
 
 from dotenv import load_dotenv
 
 from typing import (
-    Dict,
+    Dict, Coroutine, Any,
 )
 
 import os
@@ -35,10 +37,12 @@ async def request(url_: str, headers: Dict) -> str:
     return content
 
 
-async def response(response_text: str) -> None:
-    pass
+async def response(response_text) -> None:
+    todos = await json.loads(response_text)
+    print(todos)
 
 
 if __name__ == '__main__':
     loop = get_event_loop()
-    print(loop.run_until_complete(request(url_=url, headers=user_agent)))
+    # print(loop.run_until_complete(request(url_=url, headers=user_agent)))
+    loop.run_until_complete(response(response_text=request(url, user_agent)))
