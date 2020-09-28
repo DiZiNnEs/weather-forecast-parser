@@ -24,32 +24,36 @@ user_agent = {
 url = f'https://api.openweathermap.org/data/2.5/onecall?lat=53.2871&lon=69.4044&exclude=weekly&appid={API_KEY}'
 
 
-async def request(url_: str, headers: Dict) -> str:
+async def request() -> str:
     """
     This function make async request to web-site
-    :param url_: str
-    :param headers: Dict[str: str]
     :return: HTML[str]
     """
     session = ClientSession()
-    async with session.get(url=url_, headers=headers) as response_from_server:
+    async with session.get(url=url, headers=user_agent) as response_from_server:
         content = await response_from_server.text()
     await session.close()
 
     return content
 
 
-async def response(response_text: Coroutine[Any, Any, str]) -> None:
+async def response(response_text: str) -> str:
     """
     This function handle response
     :param response_text: str
     :return: None
     """
-    load_json = json.loads(await response_text)
+    load_json = json.loads(response_text)
     unload_json = json.dumps(load_json, indent=4)
-    print(unload_json)
+    return unload_json
+
+
+async def cli():
+    print('Hello')
+    print('Result of parse:')
+    print(await response(await request()))
 
 
 if __name__ == '__main__':
     loop = get_event_loop()
-    loop.run_until_complete(response(response_text=request(url, user_agent)))
+    loop.run_until_complete(cli())
