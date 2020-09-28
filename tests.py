@@ -4,9 +4,11 @@ from aiounittest import AsyncTestCase
 
 
 class MyTestCase(AsyncTestCase):
+
     async def test_parser(self):
-        result = await parser.request(parser.url, parser.user_agent)
-        self.assertEqual(True, len(result) > 330000)
+        request = await parser.request()
+        result = await parser.response(response_text=request)
+        self.assertEqual(True, len(result) > 30000)
 
 
 if __name__ == '__main__':
