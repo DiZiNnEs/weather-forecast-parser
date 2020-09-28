@@ -38,8 +38,9 @@ async def request(url_: str, headers: Dict) -> str:
 
 
 async def response(response_text) -> None:
-    todos = json.loads(await response_text)
-    print(todos)
+    load_json = json.loads(await response_text)
+    unload_json = json.dumps(load_json, indent=4)
+    print(unload_json)
 
 
 if __name__ == '__main__':
