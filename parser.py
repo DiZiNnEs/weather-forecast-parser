@@ -7,6 +7,8 @@ from dotenv import load_dotenv
 
 from typing import (
     Dict,
+    Coroutine,
+    Any,
 )
 
 import os
@@ -37,7 +39,12 @@ async def request(url_: str, headers: Dict) -> str:
     return content
 
 
-async def response(response_text) -> None:
+async def response(response_text: Coroutine[Any, Any, str]) -> None:
+    """
+    This function handle response
+    :param response_text: str
+    :return: None
+    """
     load_json = json.loads(await response_text)
     unload_json = json.dumps(load_json, indent=4)
     print(unload_json)
