@@ -30,15 +30,15 @@ async def request(url_: str, headers: Dict) -> str:
     :return: HTML[str]
     """
     session = ClientSession()
-    async with session.get(url=url_, headers=headers) as response:
-        content = await response.text()
+    async with session.get(url=url_, headers=headers) as response_from_server:
+        content = await response_from_server.text()
     await session.close()
 
     return content
 
 
 async def response(response_text) -> None:
-    todos = await json.loads(response_text)
+    todos = json.loads(await response_text)
     print(todos)
 
 
