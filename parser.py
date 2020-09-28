@@ -6,7 +6,7 @@ from asyncio import get_event_loop
 from dotenv import load_dotenv
 
 from typing import (
-    Dict, Coroutine, Any,
+    Dict,
 )
 
 import os
@@ -45,5 +45,4 @@ async def response(response_text) -> None:
 
 if __name__ == '__main__':
     loop = get_event_loop()
-    # print(loop.run_until_complete(request(url_=url, headers=user_agent)))
     loop.run_until_complete(response(response_text=request(url, user_agent)))
