@@ -52,6 +52,7 @@ async def cli():
     print('Hello')
     print('Result of parse:')
     print(await response(await request()))
+    test = await response(await request())
 
 
 if __name__ == '__main__':
