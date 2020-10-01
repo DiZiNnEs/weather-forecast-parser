@@ -11,6 +11,7 @@ aiounittest = "*"
 beautifulsoup4 = "*"
 transliterate = "*"
 python-dotenv = "*"
+pyowm = "*"
 
 [requires]
 python_version = "3.8"
