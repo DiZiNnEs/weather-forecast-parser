@@ -20,7 +20,8 @@ def current_weather():
         'Status': one_call.current.status,
         'Detailed status': one_call.current.detailed_status,
         'Visibility distance': one_call.current.visibility_distance,
-        'Temperature': one_call.current.temp
+        'Temperature': one_call.current.temp,
+        'Weather_icon_name': one_call.current.weather_icon_name,
     }
 
 
@@ -29,7 +30,7 @@ def forecast_daily():
         print(one_call.forecast_daily[x])
 
 
-forecast_daily()
+print(current_weather())
 
 
 
