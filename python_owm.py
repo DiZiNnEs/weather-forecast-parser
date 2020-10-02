@@ -10,6 +10,7 @@ dotenv.load_dotenv()
 owm = OWM(os.getenv("WEATHER_API_KEY"))
 mgr = owm.weather_manager()
 one_call = mgr.one_call(lat=52.5244, lon=13.4105)
+print()
 
 
 def current_weather():
@@ -21,5 +22,18 @@ def current_weather():
         'Visibility distance': one_call.current.visibility_distance,
         'Temperature': one_call.current.temp
     }
+
+
+def forecast_daily():
+    for x in range(0, 7):
+        print(one_call.forecast_daily[x])
+
+
+forecast_daily()
+
+
+
+
+
 
 
