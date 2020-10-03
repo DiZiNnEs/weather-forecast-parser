@@ -26,14 +26,22 @@ def current_weather():
 
 
 def forecast_daily():
+    weather = []
+    day = 1
     for x in range(0, 7):
-        print(f'Clouds: {one_call.forecast_daily[x].clouds}')
-        print(f'Humidity: {one_call.forecast_daily[x].humidity}')
-        print(f'Status: {one_call.forecast_daily[x].status}')
-        print(f'Detailed status: {one_call.forecast_daily[x].detailed_status}')
-        print(f'Visibility distance: {one_call.forecast_daily[x].visibility_distance}')
-        print(f'Temperature: {one_call.forecast_daily[x].temperature().get("day", None)}')
-        print(f'Weather_icon_name: {one_call.forecast_daily[x].weather_icon_name}')
+        weather_dict = {
+            f'Weather information for day {day} ': {f'Clouds: {one_call.forecast_daily[x].clouds}',
+                                                    f'Humidity: {one_call.forecast_daily[x].humidity}',
+                                                    f'Status: {one_call.forecast_daily[x].status}',
+                                                    f'Detailed status: {one_call.forecast_daily[x].detailed_status}',
+                                                    f'Visibility distance: {one_call.forecast_daily[x].visibility_distance}',
+                                                    f'Temperature: {one_call.forecast_daily[x].temperature().get("day", None)}',
+                                                    f'Weather_icon_name: {one_call.forecast_daily[x].weather_icon_name}'},
+        }
+        day += 1
+        weather.append(weather_dict)
+
+    print(weather)
 
 
 forecast_daily()
