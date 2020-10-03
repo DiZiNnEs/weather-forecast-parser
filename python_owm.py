@@ -1,6 +1,9 @@
+from typing import (
+    List,
+)
+
 from pyowm import OWM
-from pyowm.utils import config
-from pyowm.utils import timestamps
+
 
 import dotenv
 import os
@@ -25,7 +28,7 @@ def current_weather():
     }
 
 
-def forecast_daily():
+def forecast_daily() -> List:
     weather = []
     day = 1
     for x in range(0, 7):
@@ -41,9 +44,8 @@ def forecast_daily():
         day += 1
         weather.append(weather_dict)
 
-    print(weather)
+    return weather
 
 
 forecast_daily()
 
-# print(current_weather())
