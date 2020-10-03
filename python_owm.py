@@ -27,7 +27,13 @@ def current_weather():
 
 def forecast_daily():
     for x in range(0, 7):
-        print(one_call.forecast_daily[x].temperature('celsius').get('feels_like_morn', None))
+        print(f'Clouds: {one_call.forecast_daily[x].clouds}')
+        print(f'Humidity: {one_call.forecast_daily[x].humidity}')
+        print(f'Status: {one_call.forecast_daily[x].status}')
+        print(f'Detailed status: {one_call.forecast_daily[x].detailed_status}')
+        print(f'Visibility distance: {one_call.forecast_daily[x].visibility_distance}')
+        print(f'Temperature: {one_call.forecast_daily[x].temperature().get("day", None)}')
+        print(f'Weather_icon_name: {one_call.forecast_daily[x].weather_icon_name}')
 
 
 forecast_daily()
