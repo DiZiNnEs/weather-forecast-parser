@@ -49,5 +49,5 @@ def forecast_daily() -> List:
     return weather
 
 
-forecast_daily()
-print(forecast_daily())
+for x in forecast_daily():
+    print(x)
