@@ -27,14 +27,9 @@ def current_weather():
 
 def forecast_daily():
     for x in range(0, 7):
-        print(one_call.forecast_daily[x])
+        print(one_call.forecast_daily[x].temperature('celsius').get('feels_like_morn', None))
 
 
-print(current_weather())
+forecast_daily()
 
-
-
-
-
-
-
+# print(current_weather())
