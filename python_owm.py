@@ -30,17 +30,20 @@ def current_weather():
 def forecast_daily() -> List:
     weather = []
     day = 1
-    for x in range(0, 7):
+    for every_weather in range(0, 7):
         weather_dict = {
-            f'Weather information for day {day} ': {'Clouds': one_call.forecast_daily[x].clouds,
-                                                    'Humidity': one_call.forecast_daily[x].humidity,
-                                                    'Status': one_call.forecast_daily[x].status,
-                                                    'Detailed status': one_call.forecast_daily[x].detailed_status,
+            f'Weather information for day {day} ': {'Clouds': one_call.forecast_daily[every_weather].clouds,
+                                                    'Humidity': one_call.forecast_daily[every_weather].humidity,
+                                                    'Status': one_call.forecast_daily[every_weather].status,
+                                                    'Detailed status': one_call.forecast_daily[
+                                                        every_weather].detailed_status,
                                                     'Visibility distance': one_call.forecast_daily[
-                                                        x].visibility_distance,
-                                                    'Temperature': one_call.forecast_daily[x].temperature().get("day",
-                                                                                                                None),
-                                                    'Weather_icon_name': one_call.forecast_daily[x].weather_icon_name
+                                                        every_weather].visibility_distance,
+                                                    'Temperature': one_call.forecast_daily[
+                                                        every_weather].temperature().get("day",
+                                                                                         None),
+                                                    'Weather_icon_name': one_call.forecast_daily[
+                                                        every_weather].weather_icon_name
                                                     }
         }
         day += 1
@@ -49,5 +52,5 @@ def forecast_daily() -> List:
     return weather
 
 
-for x in forecast_daily():
-    print(x)
+for print_ in forecast_daily():
+    print(print_)
