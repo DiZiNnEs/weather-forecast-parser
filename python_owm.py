@@ -41,7 +41,7 @@ def forecast_daily() -> List:
             'Temperature': one_call.forecast_daily[
                 every_weather].temperature().get("day",
                                                  None),
-            'Weather_icon_name': one_call.forecast_daily[
+            'Weather icon name': one_call.forecast_daily[
                 every_weather].weather_icon_name
 
         }
@@ -51,5 +51,18 @@ def forecast_daily() -> List:
     return weather
 
 
-for print_ in forecast_daily():
-    print(print_['Clouds'])
+def output_weather():
+    for print_ in forecast_daily():
+        print('-------------------------------------------------------------')
+        print('Clouds: ', print_['Clouds'])
+        print('Humidity: ', print_['Humidity'])
+        print('Status: ', print_['Status'])
+        print('Detailed status: ', print_['Detailed status'])
+        print('Visibility distance: ', print_['Visibility distance'])
+        print('Temperature: ', print_['Temperature'])
+        print('Weather icon name: ', print_['Weather icon name'])
+        print('-------------------------------------------------------------')
+
+
+
+output_weather()
